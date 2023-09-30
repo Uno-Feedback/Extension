@@ -1,0 +1,8 @@
+# ide and editors
+/.vscode/*
+/.idea/*
+/.vs/*
+
+# local storage dir
+/_
+
