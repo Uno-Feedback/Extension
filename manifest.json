@@ -1,0 +1,11 @@
+{
+  "name": "UnoJS",
+  "version": "1.0.0",
+  "description": "An instrument for recording videos and capturing films to be sent to Jira, Zoho, etc.",
+  "manifest_version": 3,
+  "author": "UnoJS contributors",
+  "action":{
+    "default_popup": "index.html",
+    "default_title": "UnoJS"
+  }
+}
