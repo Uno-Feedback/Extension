@@ -6,3 +6,8 @@
 # local storage dir
 /_
 
+# lock file
+package-lock.json
+
+# node module
+node_modules

@@ -1,0 +1,10 @@
+{
+  "name": "uno-js-extension",
+  "version": "1.0.0",
+  "scripts": {
+    "bunlder": "esbuild js/lib/uno-js/index.js --bundle --outfile=js/lib/uno-js/bundle.js "
+  },
+  "dependencies": {
+    "esbuild": "0.19.5"
+  }
+}
