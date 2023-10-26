@@ -3,8 +3,8 @@
   "description": "An instrument for recording videos and capturing films to be sent to Jira, Zoho, etc.",
   "offline_enabled": true,
   "version": "0.0.1",
-  "manifest_version": 2,
-  "browser_action": {
+  "manifest_version": 3,
+  "action": {
     "default_icon": "assets/icons/logo-32.png",
     "default_popup": "html/popup.html"
   },
@@ -23,8 +23,11 @@
       ]
     }
   ],
-  "permissions": [
+  "host_permissions": [
     "<all_urls>",
+    "file://*"
+  ],
+  "permissions": [
     "activeTab",
     "tabCapture",
     "tabs",
@@ -32,16 +35,21 @@
     "storage",
     "identity",
     "downloads.shelf",
-    "file://*"
+    "scripting"
   ],
   "web_accessible_resources": [
-    "html/popup.html",
-    "js/popup.js",
-    "css/popup.css",
-
-    "js/main.js",
-    "css/main.css",
-
-    "js/lib/uno-js/index.js"
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "resources": [
+        "html/popup.html",
+        "js/popup.js",
+        "css/popup.css",
+        "js/main.js",
+        "css/main.css",
+        "js/lib/uno-js/index.js"
+      ]
+    }
   ]
 }

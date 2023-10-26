@@ -1,14 +1,20 @@
 const recordButton = document.getElementById("record-button");
-console.log(recordButton);
+async function getCurrentTab() {
+  const queryOptions = { active: true, currentWindow: true };
+  const tabs = await chrome.tabs.query(queryOptions);
+  return tabs[0];
+}
 recordButton.onclick = function () {
   recordButton.classList.add("record-started");
   recordButton.innerHTML = "Recording...";
-  chrome.tabs.getSelected(null, function (tab) {
-    chrome.tabs.executeScript(tab.id, {
-      file: "./js/main.js",
+  getCurrentTab().then((tab) => {
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      files: ["./js/main.js"],
     });
-    chrome.tabs.insertCSS(tab.id, {
-      file: "./css/main.css",
+    chrome.scripting.insertCSS({
+      files: ["./css/main.css"],
+      target: { tabId: tab.id },
     });
   });
 };
