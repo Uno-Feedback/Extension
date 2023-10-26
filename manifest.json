@@ -1,11 +1,47 @@
 {
-  "name": "UnoJS",
-  "version": "1.0.0",
+  "name": "uno js",
   "description": "An instrument for recording videos and capturing films to be sent to Jira, Zoho, etc.",
-  "manifest_version": 3,
-  "author": "UnoJS contributors",
-  "action":{
-    "default_popup": "index.html",
-    "default_title": "UnoJS"
-  }
+  "offline_enabled": true,
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "assets/icons/logo-32.png",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "16": "assets/icons/logo-16.png",
+    "48": "assets/icons/logo-48.png",
+    "128": "assets/icons/logo-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "tabCapture",
+    "tabs",
+    "downloads",
+    "storage",
+    "identity",
+    "downloads.shelf",
+    "file://*"
+  ],
+  "web_accessible_resources": [
+    "html/popup.html",
+    "js/popup.js",
+    "css/popup.css",
+
+    "js/main.js",
+    "css/main.css",
+
+    "js/lib/uno-js/index.js"
+  ]
 }
