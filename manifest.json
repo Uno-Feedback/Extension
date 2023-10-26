@@ -13,17 +13,8 @@
     "48": "assets/icons/logo-48.png",
     "128": "assets/icons/logo-128.png"
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "js/content.js"
-      ]
-    }
-  ],
   "host_permissions": [
+    "*://*/*",
     "<all_urls>",
     "file://*"
   ],
@@ -40,15 +31,17 @@
   "web_accessible_resources": [
     {
       "matches": [
-        "<all_urls>"
+        "*://*/*",
+        "<all_urls>",
+        "file://*"
       ],
       "resources": [
         "html/popup.html",
         "js/popup.js",
         "css/popup.css",
-        "js/main.js",
-        "css/main.css",
-        "js/lib/uno-js/index.js"
+
+        "js/lib/uno-js/bundle.js",
+        "js/lib/uno-js/css/index.css"
       ]
     }
   ]

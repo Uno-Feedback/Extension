@@ -10,10 +10,10 @@ recordButton.onclick = function () {
   getCurrentTab().then((tab) => {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      files: ["./js/main.js"],
+      files: ["./js/lib/uno-js/bundle.js"],
     });
     chrome.scripting.insertCSS({
-      files: ["./css/main.css"],
+      files: ["./js/lib/uno-js/css/index.css"],
       target: { tabId: tab.id },
     });
   });
