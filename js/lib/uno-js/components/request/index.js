@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 // Import necessary types from the "type" module.
-import optionsState from "../../shared/states.js";
+import optionsState from "../../shared/states";
 /**
  * Function to send a request along with recorded audio file and form values.
  *

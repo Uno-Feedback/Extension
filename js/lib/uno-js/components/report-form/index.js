@@ -1,9 +1,9 @@
-import initialModal, { createTitle, hideModal, showModal } from "../modal.js";
-import optionsState from "../../shared/states.js";
-import { submitIcon } from "../../assets/svg.js";
-import Observable from "../observable.js";
-import request from "../request.js";
-import { lang } from "../../shared/langs.js";
+import initialModal, { createTitle, hideModal, showModal } from "../modal";
+import optionsState from "../../shared/states";
+import { submitIcon } from "../../assets/svg";
+import Observable from "../observable";
+import request from "../request";
+import { lang } from "../../shared/langs";
 const storeValues = {
     type: "1",
     priority: "3",

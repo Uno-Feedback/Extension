@@ -13,7 +13,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { crossIcon } from "../../assets/svg.js";
+import { crossIcon } from "../../assets/svg";
 /**
  * Create the necessary HTML elements for the modal.
  */

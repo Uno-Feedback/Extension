@@ -18,14 +18,14 @@
  *
  * For more information, please see the [uno-js documentation](https://github.com/Uno-Feedback/UnoJs#readme).
  */
-import { checkRecordState, closeRecordWidget, openRecordWidget, resetWidget } from "./components/widget/widget.js";
-import ScreenMask from "./components/screen-mask/screen-mask.js";
-import { runTimer, stopTimer } from "./components/timer/timer.js";
-import optionsState from "./shared/states.js";
-import Observable from "./components/observable/observable.js";
-import { endSecret, startSecret } from "./components/auto-secret/auto-secret.js";
-import MediaStreamRecorder from "./components/media-stream-recorder/media-stream-recorder.js";
-import { AUDIO_CHANNEL_COUNT, AUDIO_SAMPLE_SIZE, MAX_FRAME_RATE } from "./shared/constants.js";
+import { checkRecordState, closeRecordWidget, openRecordWidget, resetWidget } from "./components/widget/widget";
+import ScreenMask from "./components/screen-mask/screen-mask";
+import { runTimer, stopTimer } from "./components/timer/timer";
+import optionsState from "./shared/states";
+import Observable from "./components/observable/observable";
+import { endSecret, startSecret } from "./components/auto-secret/auto-secret";
+import MediaStreamRecorder from "./components/media-stream-recorder/media-stream-recorder";
+import { AUDIO_CHANNEL_COUNT, AUDIO_SAMPLE_SIZE, MAX_FRAME_RATE } from "./shared/constants";
 /**
  * The UnoJSBuilder class is the main entry point for the uno-js package.
  * It provides methods for starting and stopping recording, as well as for managing the mask and mute features.

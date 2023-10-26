@@ -7,9 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { AUDIO_SAMPLE_SIZE, MAX_FRAME_RATE, AUDIO_CHANNEL_COUNT } from "../../shared/constants.js";
-import Observable from "../observable.js";
-import videoPreview from "../video-preview.js";
+import { AUDIO_SAMPLE_SIZE, MAX_FRAME_RATE, AUDIO_CHANNEL_COUNT } from "../../shared/constants";
+import Observable from "../observable";
+import videoPreview from "../video-preview";
 class MediaStreamRecorder {
     constructor(options) {
         var _a, _b, _c;

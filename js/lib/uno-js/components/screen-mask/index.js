@@ -1,4 +1,4 @@
-import { crossIcon } from "../../assets/svg.js";
+import { crossIcon } from "../../assets/svg";
 class ScreenMask {
     constructor() {
         this.createElement = () => {

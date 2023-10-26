@@ -4,7 +4,7 @@
  * The `startSecret()` function starts blurring all elements with the autoSecretKey attribute.\
  * The `endSecret()` function stops blurring all elements with the autoSecretKey attribute.
  */
-import optionsState from "../../shared/states.js";
+import optionsState from "../../shared/states";
 /**
  * Apply a blur effect to the given element.
  *

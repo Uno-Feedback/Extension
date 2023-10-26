@@ -13,9 +13,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { cameraIcon, crossIcon, micIcon, noteIcon, videoCameraIcon } from "../../assets/svg/svg.js";
-import initialVideoElements, { counter, maskStartButton, maskStopButton, maskWrapper, muteStartButton, muteStopButton, muteWrapper, recordingButton, recordWrapper, startRecordButton, stopRecordButton, timerWrapper } from "./video.js";
-import { lang } from "../../shared/langs.js";
+import { cameraIcon, crossIcon, micIcon, noteIcon, videoCameraIcon } from "../../assets/svg/svg";
+import initialVideoElements, { counter, maskStartButton, maskStopButton, maskWrapper, muteStartButton, muteStopButton, muteWrapper, recordingButton, recordWrapper, startRecordButton, stopRecordButton, timerWrapper } from "./video";
+import { lang } from "../../shared/langs";
 // Widget Element
 const widget = document.createElement("div");
 // Wrapper Element

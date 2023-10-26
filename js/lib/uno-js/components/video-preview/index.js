@@ -7,10 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import initialModal, { createTitle, showModal } from "../modal.js";
-import { lang } from "../../shared/langs.js";
-import { brushIcon, confirmIcon, fullscreenIcon, pauseIcon, playIcon, timeline35, timeline60, videoPoster, volumeIcon, volumeOffIcon } from "../../assets/svg.js";
-import openReportFormModal from "../report-form.js";
+import initialModal, { createTitle, showModal } from "../modal";
+import { lang } from "../../shared/langs";
+import { brushIcon, confirmIcon, fullscreenIcon, pauseIcon, playIcon, timeline35, timeline60, videoPoster, volumeIcon, volumeOffIcon } from "../../assets/svg";
+import openReportFormModal from "../report-form";
 function formatBytes(bytes, decimals = 2) {
     if (!+bytes)
         return "0 Bytes";

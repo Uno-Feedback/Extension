@@ -1,4 +1,4 @@
-import { MAX_VIDEO_LENGTH } from './constants.js';
+import { MAX_VIDEO_LENGTH } from './constants';
 const optionsState = {
     user: {
         fullName: "",
