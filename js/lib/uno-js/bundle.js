@@ -1827,13 +1827,25 @@
   };
   var unoJS = new UnoJSBuilder();
   /* Start: Add for Initialize */
+  // Get data from storage
+  const requiredData = {
+    fullName: null,
+    autoSecretKey: null,
+    requestUrl: null,
+    apiKey: null,
+  };
+  chrome.storage.sync.get(null, function (items) {
+    Object.keys(items).forEach((item) => {
+      requiredData[item] = items[item];
+    });
+  });
   const options = {
     user: {
-      fullName: "John Doe",
+      fullName: requiredData.fullName,
       email: "j.doe@example.com",
       avatar: null,
     },
-    autoSecretKey: "secret",
+    autoSecretKey: requiredData.autoSecretKey,
     callbacks: {
       onOpenWidget: () => console.log("Widget opened"),
       onCloseWidget: () => console.log("Widget closed"),
@@ -1850,8 +1862,8 @@
       onError: () => console.log("Error!"),
     },
     subscriptionData: {
-      apiKey: "#API_KEY#",
-      requestUrl: "#REQUEST_URL#",
+      apiKey: requiredData.apiKey,
+      requestUrl: requiredData.requestUrl,
     },
     startButtonId: "start-btn",
   };
