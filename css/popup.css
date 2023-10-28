@@ -1,22 +1,52 @@
+* {
+    box-sizing: border-box;
+}
 body {
     margin: 0;
     padding: 1rem;
     width: 300px;
 }
 .bottom-wrapper {
+    margin-top: .5rem;
     text-align: center;
 }
 #record-button {
     background-color: crimson;
     border: 1px solid crimson;
     color: #FFF;
-    padding: .5rem .1rem;
+    padding: .5rem 1rem;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 6px;
     outline: none;
     width: 100%;
 }
 #record-button.record-started {
     background-color: cornflowerblue;
     border-color: cornflowerblue;
+}
+.form-container {
+    padding-bottom: .5rem;
+}
+.form-group {
+    margin-bottom: 1rem;
+    position: relative;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: .5rem;
+}
+.form-group input {
+    width: 100%;
+    border: 1px solid #646464;
+    border-radius: 6px;
+    padding: .5rem 1rem;
+}
+.form-group .input-message {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    color: #DC143C;
+    font-size: 90%;
 }
