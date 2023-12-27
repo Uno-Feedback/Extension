@@ -1,3 +1,4 @@
+const body = document.getElementById("body");
 /* Information Form */
 const handleChange = (event) => {
   const name = event.target.name;
@@ -34,7 +35,7 @@ const handleValidation = function () {
   return error;
 };
 /* Record Button */
-const recordButton = document.getElementById("record-button");
+// const recordButton = document.getElementById("record-button");
 
 async function getCurrentTab() {
   const queryOptions = { active: true, currentWindow: true };
@@ -42,18 +43,42 @@ async function getCurrentTab() {
   return tabs[0];
 }
 
-recordButton.onclick = function () {
-  if (handleValidation()) return;
-  recordButton.classList.add("record-started");
-  recordButton.innerHTML = "Recording...";
-  getCurrentTab().then((tab) => {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      files: ["./js/lib/uno-js/bundle.js"],
-    });
-    chrome.scripting.insertCSS({
-      files: ["./js/lib/uno-js/css/index.css"],
-      target: { tabId: tab.id },
-    });
-  });
+// recordButton.onclick = function () {
+//   if (handleValidation()) return;
+//   recordButton.classList.add("record-started");
+//   recordButton.innerHTML = "Recording...";
+//   getCurrentTab().then((tab) => {
+//     chrome.scripting.executeScript({
+//       target: { tabId: tab.id },
+//       files: ["./js/lib/uno-js/bundle.js"],
+//     });
+//     chrome.scripting.insertCSS({
+//       files: ["./js/lib/uno-js/css/index.css"],
+//       target: { tabId: tab.id },
+//     });
+//   });
+// };
+
+/* setting Button */
+const formWrapper = document.getElementById("formWrapper");
+const formHeader = document.getElementById("formHeader");
+const settingButton = document.getElementById("setting");
+const report = document.querySelector(".report");
+const menu = document.querySelector(".menu");
+settingButton.onclick = function () {
+  menu.style.display = "none";
+  report.style.display = "none";
+  formHeader.style.display = "none";
+  formWrapper.style.display = "block";
+  body.style.padding = "6px 24px";
+};
+
+/* back to menu */
+const backIc = document.getElementById("backIc");
+backIc.onclick = function () {
+  menu.style.display = "flex";
+  formWrapper.style.display = "none";
+  report.style.display = "block";
+  formHeader.style.display = "flex";
+  body.style.padding = "24px";
 };
