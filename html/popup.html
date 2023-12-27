@@ -1,36 +1,93 @@
 <!DOCTYPE html>
-<html lang='en'>
-<head>
-  <meta charset='UTF-8'>
-  <title>Title</title>
-  <link rel='stylesheet' href='../css/popup.css'>
-</head>
-<body>
-<div class='form-container'>
-  <div class='form-group'>
-    <label for='fullName'>First Name:</label>
-    <input type='text' id='fullName' name='fullName' placeholder='Full Name' />
-    <span class='input-message'></span>
-  </div>
-  <div class='form-group'>
-    <label for='autoSecretKey'>Auto Secret Key:</label>
-    <input type='text' id='autoSecretKey' name='autoSecretKey' placeholder='Auto Secret Key' />
-    <span class='input-message'></span>
-  </div>
-  <div class='form-group'>
-    <label for='requestUrl'>Request URL:</label>
-    <input type='text' id='requestUrl' name='requestUrl' placeholder='Request URL' />
-    <span class='input-message'></span>
-  </div>
-  <div class='form-group'>
-    <label for='apiKey'>API Key:</label>
-    <input type='text' id='apiKey' name='apiKey' placeholder='API Key' />
-    <span class='input-message'></span>
-  </div>
-</div>
-<div class='bottom-wrapper'>
-  <button type='button' id='record-button'>Start Record</button>
-</div>
-<script type='text/javascript' src='../js/popup.js'></script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/popup.css" />
+  </head>
+  <body id="body">
+    <div class="form-container">
+      <div class="formHeader" id="formHeader">
+        <img
+          src="../assets/icons/unoLogo.svg"
+          alt="unoLogo"
+          width="76"
+          height="46"
+        />
+        <img
+          src="../assets/icons/menuIcons/setting.svg"
+          id="setting"
+          alt="setting"
+          width="24"
+          height="24"
+          class="settingIc"
+        />
+      </div>
+      <div class="report">Report your issue</div>
+      <div class="menu">
+        <div class="menuBox">
+          <img src="../assets/icons/menuIcons/video.svg" alt="video" />
+          <h4>Video</h4>
+        </div>
+        <div class="menuBox">
+          <img src="../assets/icons/menuIcons/camera.svg" alt="camera" />
+          <h4>Image</h4>
+        </div>
+        <div class="menuBox">
+          <img
+            src="../assets/icons/menuIcons/microphone.svg"
+            alt="microphone"
+          />
+          <h4>Voice</h4>
+        </div>
+        <div class="menuBox">
+          <img src="../assets/icons/menuIcons/document.svg" alt="document" />
+          <h4>Note</h4>
+        </div>
+      </div>
+      <div class="form-wrapper" id="formWrapper">
+        <div class="setting-header">
+          <img src="../assets/icons/menuIcons/arrow.svg" alt="arrow" width="20" height="20" id="backIc">
+          <h3>Setting</h3>
+        </div>
+        <div class="form-group">
+          <label for="fullName">First Name</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+          />
+          <span class="input-message"></span>
+        </div>
+        <div class="form-group">
+          <label for="autoSecretKey">Auto Secret Key</label>
+          <input
+            type="text"
+            id="autoSecretKey"
+            name="autoSecretKey"
+          />
+          <span class="input-message"></span>
+        </div>
+        <div class="form-group">
+          <label for="requestUrl">Request URL</label>
+          <input
+            type="text"
+            id="requestUrl"
+            name="requestUrl"
+          />
+          <span class="input-message"></span>
+        </div>
+        <div class="form-group">
+          <label for="apiKey">API Key</label>
+          <input type="text" id="apiKey" name="apiKey"/>
+          <span class="input-message"></span>
+        </div>
+        <!-- <div class="bottom-wrapper">
+          <button type="button" id="record-button">Start Record</button>
+        </div> -->
+      </div>
+    </div>
+
+    <script type="text/javascript" src="../js/popup.js"></script>
+  </body>
 </html>
