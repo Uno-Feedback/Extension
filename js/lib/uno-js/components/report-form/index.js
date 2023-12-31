@@ -11,6 +11,39 @@ const storeValues = {
     subject: "",
     description: ""
 };
+const OS = () => {
+    if (navigator.appVersion.indexOf("Win") != -1)
+        return "Windows";
+    if (navigator.appVersion.indexOf("Mac") != -1)
+        return "MacOS";
+    if (navigator.appVersion.indexOf("X11") != -1)
+        return "UNIX";
+    if (navigator.appVersion.indexOf("Linux") != -1)
+        return "Linux";
+    return "Unknown OS";
+};
+const information = [
+    {
+        label: `${lang.en.reportForm.info.url}:`,
+        data: window.location.href
+    },
+    {
+        label: `${lang.en.reportForm.info.captured}:`,
+        data: createName()
+    },
+    {
+        label: `${lang.en.reportForm.info.deviceInfo}:`,
+        data: navigator.userAgent
+    },
+    {
+        label: `${lang.en.reportForm.info.OS}:`,
+        data: OS()
+    },
+    {
+        label: `${lang.en.reportForm.info.windowSize}:`,
+        data: `${window.innerWidth} x ${window.innerHeight}`
+    }
+];
 const content = document.createElement("div");
 const contentInner = document.createElement("div");
 const submitButton = document.createElement("button");
@@ -39,17 +72,17 @@ const clearError = (element) => {
     element.classList.remove("uno-form-input-error");
 };
 const validateForm = () => {
-    const subject = document.getElementById("subject");
-    const description = document.getElementById("description");
-    if (!storeValues.subject) {
-        handleError(subject);
-        return false;
-    }
-    if (!storeValues.description) {
-        handleError(description);
-        return false;
-    }
-    return true;
+    let isValid = true;
+    const values = { subject: storeValues["subject"], description: storeValues["description"] };
+    Object.keys(values).forEach(name => {
+        const value = values[name];
+        if (!value) {
+            const element = document.getElementById(name);
+            handleError(element);
+            isValid = false;
+        }
+    });
+    return isValid;
 };
 const handleSubmit = (acceptButton, onSubmit) => {
     if (!validateForm())
@@ -91,8 +124,8 @@ const createFooter = ({}, onSubmit) => {
         }
     ];
     createRadio(sendToWrapper, buttonGroup, sendOptions, 0, lang.en.reportForm.sendTo.label, "sendTo", false);
-    // - Append the 'Send To' to Footer
-    footer.appendChild(sendToWrapper);
+    // - Append the 'Send To' to Footer.
+    // footer.appendChild(sendToWrapper);
     // - Append Submit Button to Footer
     footer.appendChild(submitButton);
 };
@@ -268,10 +301,20 @@ const createRadioWrapper = (row, col) => {
     // Type
     ///// Bug: 1
     ///// Report: 2
+    /////// [
+    ///////   {
+    ///////     "id": "12101",
+    ///////     "name": "Uno-Bug"
+    ///////   },
+    ///////   {
+    ///////     "id": "12305",
+    ///////     "name": "Uno-Report"
+    ///////   }
+    /////// ]
     const typeOptions = [
-        { label: lang.en.reportForm.type.bug, value: "1", color: "#F04438" },
-        { label: lang.en.reportForm.type.report, value: "2", color: "#F79009" },
-        { label: lang.en.reportForm.type.feature, value: "3", color: "#17B26A" }
+        { label: lang.en.reportForm.type.bug, value: "12101", color: "#F04438" },
+        { label: lang.en.reportForm.type.report, value: "12305", color: "#F79009" }
+        // {label: lang.en.reportForm.type.feature, value: "3", color: "#17B26A"}
     ];
     createRadio(buttonGroup, innerCol.cloneNode(true), typeOptions, 0, lang.en.reportForm.type.label, "type", true);
     // Priority
@@ -281,10 +324,34 @@ const createRadioWrapper = (row, col) => {
     //// low: 4
     //// lowest: 5
     //// critical: 6
+    ////// [
+    //////   {
+    //////     "id": "1",
+    //////     "name": "Highest"
+    //////   },
+    //////   {
+    //////     "id": "2",
+    //////     "name": "High"
+    //////   },
+    //////   {
+    //////     "id": "3",
+    //////     "name": "Medium"
+    //////   },
+    //////   {
+    //////     "id": "4",
+    //////     "name": "Low"
+    //////   },
+    //////   {
+    //////     "id": "10100",
+    //////     "name": "Critical"
+    //////   }
+    ////// ]
     const priorityOptions = [
-        { label: lang.en.reportForm.priority.low, value: "4", color: "#F79008" },
-        { label: lang.en.reportForm.priority.medium, value: "3", color: "#2A70FE" },
-        { label: lang.en.reportForm.priority.high, value: "2", color: "#E14EB6" }
+        { label: "Highest", value: "1" },
+        { label: "High", value: "2" },
+        { label: "Medium", value: "3" },
+        { label: "Low", value: "4" },
+        { label: "Critical", value: "10100" }
     ];
     createSelect(buttonGroup, innerCol.cloneNode(true), inputLabel.cloneNode(true), priorityOptions, lang.en.reportForm.priority.label, "priority", 1);
     container.appendChild(buttonGroup);
@@ -366,39 +433,6 @@ const createInfo = () => {
     // - Info
     const infoWrapper = document.createElement("div");
     infoWrapper.classList.add("uno-info-list");
-    const OS = () => {
-        if (navigator.appVersion.indexOf("Win") != -1)
-            return "Windows";
-        if (navigator.appVersion.indexOf("Mac") != -1)
-            return "MacOS";
-        if (navigator.appVersion.indexOf("X11") != -1)
-            return "UNIX";
-        if (navigator.appVersion.indexOf("Linux") != -1)
-            return "Linux";
-        return "Unknown OS";
-    };
-    const information = [
-        {
-            label: `${lang.en.reportForm.info.url}:`,
-            data: window.location.href
-        },
-        {
-            label: `${lang.en.reportForm.info.captured}:`,
-            data: createName()
-        },
-        {
-            label: `${lang.en.reportForm.info.deviceInfo}:`,
-            data: navigator.userAgent
-        },
-        {
-            label: `${lang.en.reportForm.info.OS}:`,
-            data: OS()
-        },
-        {
-            label: `${lang.en.reportForm.info.windowSize}:`,
-            data: `${window.innerWidth} x ${window.innerHeight}`
-        }
-    ];
     information.forEach(info => {
         const infoRow = document.createElement("div");
         infoRow.classList.add("uno-info-row");
@@ -475,6 +509,7 @@ const closeRequestFormModal = () => {
     hideModal();
     destroyRequestForm();
     /* todo set loading false*/
+    Observable.fire("enableButton");
 };
 const destroyRequestForm = () => {
     /**
@@ -496,13 +531,14 @@ const openReportFormModal = (recordedBlob) => {
     const { fullName, email, avatar } = optionsState.user;
     appendFormToModal({ fullName, email, avatar }, { fileSize, fileName: createName() }, () => {
         /* todo set loading true */
-        request(recordedBlob, createName(), storeValues)
+        request(recordedBlob, createName(), { storeValues, information })
             .then(response => {
             console.info(`[uno-js] Response: ${response.message}`);
             closeRequestFormModal();
         })
             .catch(error => {
             console.error(`[uno-js] ${error}`);
+            Observable.fire("enableButton");
         });
     });
 };

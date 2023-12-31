@@ -1,4 +1,4 @@
-import { MAX_VIDEO_LENGTH } from './constants';
+import { MAX_VIDEO_LENGTH } from "./constants";
 const optionsState = {
     user: {
         fullName: "",
@@ -10,6 +10,7 @@ const optionsState = {
         requestUrl: ""
     },
     startButtonId: "",
-    videoMaxLength: MAX_VIDEO_LENGTH
+    videoMaxLength: MAX_VIDEO_LENGTH,
+    isExtension: false
 };
 export default optionsState;

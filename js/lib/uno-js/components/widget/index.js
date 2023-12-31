@@ -13,9 +13,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { cameraIcon, crossIcon, micIcon, noteIcon, videoCameraIcon } from "../../assets/svg/svg";
+import { cameraIcon, crossIcon, micIcon, noteIcon, videoCameraIcon } from "../../assets/svg";
 import initialVideoElements, { counter, maskStartButton, maskStopButton, maskWrapper, muteStartButton, muteStopButton, muteWrapper, recordingButton, recordWrapper, startRecordButton, stopRecordButton, timerWrapper } from "./video";
 import { lang } from "../../shared/langs";
+import optionsState from "../../shared/states";
 // Widget Element
 const widget = document.createElement("div");
 // Wrapper Element
@@ -59,6 +60,8 @@ const initialInnerElements = () => {
     // Widget
     widget.setAttribute("id", "uno-widget");
     widget.classList.add("uno-widget");
+    if (optionsState.isExtension)
+        widget.classList.add("uno-widget-extension");
     // Title
     title.classList.add("uno-widget-title");
     title.innerText = lang.en.widget.title;

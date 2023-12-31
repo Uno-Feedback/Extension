@@ -92,24 +92,28 @@ backIc.onclick = function () {
 };
 
 /* Console functions */
-document.getElementById("startCapture").addEventListener("click", () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, { action: "startCapture" });
-  });
-});
-
-document.getElementById("stopCapture").addEventListener("click", () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, { action: "stopCapture" });
-  });
-});
-
-chrome.runtime.connect({ name: "popup" }).onMessage.addListener((msg) => {
-  if (msg.action === "updateLogs") {
-    document.getElementById("logs").innerText = JSON.stringify(
-      msg.logs,
-      null,
-      2
-    );
-  }
-});
+// document.getElementById("startCapture").addEventListener("click", () => {
+//   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+//     chrome.tabs.sendMessage(tabs[0].id, { action: "startCapture" });
+//   });
+// });
+//
+// document.getElementById("stopCapture").addEventListener("click", () => {
+//   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+//     chrome.tabs.sendMessage(tabs[0].id, { action: "stopCapture" });
+//   });
+// });
+//
+// chrome.runtime
+//   .connect({ name: "popup" })
+//   .onMessage.addListener(({ action, logs }) => {
+//     if (action === "updateLogs") {
+//       updateLogsUI(logs);
+//     }
+//   });
+//
+// function updateLogsUI(logs) {
+//   // Update the UI with the received logs
+//   const logsElement = document.getElementById("logs");
+//   logsElement.innerText = JSON.stringify(logs, null, 2);
+// }
