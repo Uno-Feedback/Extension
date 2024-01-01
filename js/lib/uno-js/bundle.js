@@ -6,7 +6,7 @@
   startButton.style.display = "none";
   document.body.appendChild(startButton);
   /* End: Add for Initialize */
-  // js/lib/uno-js/assets/svg/svg.js
+  // js/lib/uno-js/assets/svg/index.js
   var videoCameraIcon =
     '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.53 20.42H6.21C3.05 20.42 2 18.32 2 16.21V7.79C2 4.63 3.05 3.58 6.21 3.58H12.53C15.69 3.58 16.74 4.63 16.74 7.79V16.21C16.74 19.37 15.68 20.42 12.53 20.42Z" stroke="#15171A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.52 17.1L16.74 15.15V8.83999L19.52 6.88999C20.88 5.93999 22 6.51999 22 8.18999V15.81C22 17.48 20.88 18.06 19.52 17.1Z" stroke="#15171A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.5 11C12.3284 11 13 10.3284 13 9.5C13 8.67157 12.3284 8 11.5 8C10.6716 8 10 8.67157 10 9.5C10 10.3284 10.6716 11 11.5 11Z" stroke="#15171A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var cameraIcon =
@@ -143,8 +143,8 @@
         title: "Report Your Issue",
         type: {
           label: "Type",
-          bug: "bug",
-          report: "report",
+          bug: "Uno-Bug",
+          report: "Uno-Report",
           feature: "feature",
         },
         priority: {
@@ -175,7 +175,30 @@
     },
   };
 
-  // js/lib/uno-js/components/widget/widget.js
+  // js/lib/uno-js/shared/constants.js
+  var MAX_VIDEO_LENGTH = 1;
+  var AUDIO_SAMPLE_SIZE = 100;
+  var MAX_FRAME_RATE = 30;
+  var AUDIO_CHANNEL_COUNT = 2;
+
+  // js/lib/uno-js/shared/states.js
+  var optionsState = {
+    user: {
+      fullName: "",
+      email: "",
+      avatar: "",
+    },
+    subscriptionData: {
+      apiKey: "",
+      requestUrl: "",
+    },
+    startButtonId: "",
+    videoMaxLength: MAX_VIDEO_LENGTH,
+    isExtension: false,
+  };
+  var states_default = optionsState;
+
+  // js/lib/uno-js/components/widget/index.js
   var __awaiter = function (thisArg, _arguments, P, generator) {
     function adopt(value) {
       return value instanceof P
@@ -240,6 +263,8 @@
   var initialInnerElements = () => {
     widget.setAttribute("id", "uno-widget");
     widget.classList.add("uno-widget");
+    if (states_default.isExtension)
+      widget.classList.add("uno-widget-extension");
     title.classList.add("uno-widget-title");
     title.innerText = lang.en.widget.title;
     widget.appendChild(title);
@@ -270,7 +295,6 @@
   }) =>
     __awaiter(void 0, void 0, void 0, function* () {
       startRecordButton.onclick = () => {
-        console.log("onStartRecord");
         onStartRecord(true);
       };
       stopRecordButton.onclick = () => {
@@ -340,7 +364,7 @@
     recordingButton.style.display = "";
   };
 
-  // js/lib/uno-js/components/screen-mask/screen-mask.js
+  // js/lib/uno-js/components/screen-mask/index.js
   var ScreenMask = class {
     constructor() {
       this.createElement = () => {
@@ -465,7 +489,7 @@
   };
   var screen_mask_default = ScreenMask;
 
-  // js/lib/uno-js/components/timer/timer.js
+  // js/lib/uno-js/components/timer/index.js
   var timer;
   var timerRef;
   var runTimer = (ref, callback) => {
@@ -503,29 +527,7 @@
     clearInterval(timer);
   };
 
-  // js/lib/uno-js/shared/constants.js
-  var MAX_VIDEO_LENGTH = 1;
-  var AUDIO_SAMPLE_SIZE = 100;
-  var MAX_FRAME_RATE = 30;
-  var AUDIO_CHANNEL_COUNT = 2;
-
-  // js/lib/uno-js/shared/states.js
-  var optionsState = {
-    user: {
-      fullName: "",
-      email: "",
-      avatar: "",
-    },
-    subscriptionData: {
-      apiKey: "",
-      requestUrl: "",
-    },
-    startButtonId: "",
-    videoMaxLength: MAX_VIDEO_LENGTH,
-  };
-  var states_default = optionsState;
-
-  // js/lib/uno-js/components/observable/observable.js
+  // js/lib/uno-js/components/observable/index.js
   var Observable = class {
     constructor() {
       this.observers = [];
@@ -566,7 +568,7 @@
   };
   var observable_default = new Observable();
 
-  // js/lib/uno-js/components/auto-secret/auto-secret.js
+  // js/lib/uno-js/components/auto-secret/index.js
   var setBlur = (element) => {
     element.style.transition = "all 0.3s ease-in-out";
     element.style.filter = "blur(5px)";
@@ -609,7 +611,7 @@
     });
   };
 
-  // js/lib/uno-js/components/modal/modal.js
+  // js/lib/uno-js/components/modal/index.js
   var __awaiter2 = function (thisArg, _arguments, P, generator) {
     function adopt(value) {
       return value instanceof P
@@ -695,7 +697,7 @@
   };
   var modal_default = initialModal;
 
-  // js/lib/uno-js/components/request/request.js
+  // js/lib/uno-js/components/request/index.js
   var __awaiter3 = function (thisArg, _arguments, P, generator) {
     function adopt(value) {
       return value instanceof P
@@ -727,20 +729,42 @@
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-  var request = (recordedBlob, fileName, values) =>
+  var request = (
+    recordedBlob,
+    fileName,
+    { storeValues: storeValues2, information: information2 }
+  ) =>
     __awaiter3(void 0, void 0, void 0, function* () {
+      const metaDataConverter = (information3) => {
+        const metadata = {};
+        information3.forEach((item) => {
+          metadata[item.label] = item.data;
+        });
+        return metadata;
+      };
       const file = new File([recordedBlob], fileName);
       const formData = new FormData();
-      const description = {
-        FullName: states_default.user.fullName,
-        Subject: values["subject"],
-        Description: values["description"],
-        Type: values["type"],
-        Priority: values["priority"],
-        apiKey: states_default.subscriptionData.apiKey,
-      };
+      const Reporter = states_default.user.fullName;
+      const ReportUrl = window.location.href;
+      const Subject = storeValues2["subject"];
+      const Description = storeValues2["description"];
+      const Type = storeValues2["type"];
+      const Priority = storeValues2["priority"];
+      const ConnectorMetaData = metaDataConverter(information2);
+      const ProjectToken = states_default.subscriptionData.apiKey;
+      const AttachmentType = 10;
+      const ConnectorId = "886cc999-ff80-402d-a80a-08dbf5779ea5";
       formData.append("File", file, `${fileName}.webm`);
-      formData.append("Description", JSON.stringify(description));
+      formData.append("Reporter", JSON.stringify(Reporter));
+      formData.append("ReportUrl", JSON.stringify(ReportUrl));
+      formData.append("Subject", JSON.stringify(Subject));
+      formData.append("Description", JSON.stringify(Description));
+      formData.append("Type", JSON.stringify(Type));
+      formData.append("Priority", JSON.stringify(Priority));
+      formData.append("ConnectorMetaData", JSON.stringify(ConnectorMetaData));
+      formData.append("ProjectToken", JSON.stringify(ProjectToken));
+      formData.append("AttachmentType", JSON.stringify(AttachmentType));
+      formData.append("ConnectorId", JSON.stringify(ConnectorId));
       const response = yield fetch(states_default.subscriptionData.requestUrl, {
         method: "POST",
         body: formData,
@@ -749,7 +773,7 @@
     });
   var request_default = request;
 
-  // js/lib/uno-js/components/report-form/report-form.js
+  // js/lib/uno-js/components/report-form/index.js
   var storeValues = {
     type: "1",
     priority: "3",
@@ -757,6 +781,35 @@
     subject: "",
     description: "",
   };
+  var OS = () => {
+    if (navigator.appVersion.indexOf("Win") != -1) return "Windows";
+    if (navigator.appVersion.indexOf("Mac") != -1) return "MacOS";
+    if (navigator.appVersion.indexOf("X11") != -1) return "UNIX";
+    if (navigator.appVersion.indexOf("Linux") != -1) return "Linux";
+    return "Unknown OS";
+  };
+  var information = [
+    {
+      label: `${lang.en.reportForm.info.url}:`,
+      data: window.location.href,
+    },
+    {
+      label: `${lang.en.reportForm.info.captured}:`,
+      data: createName(),
+    },
+    {
+      label: `${lang.en.reportForm.info.deviceInfo}:`,
+      data: navigator.userAgent,
+    },
+    {
+      label: `${lang.en.reportForm.info.OS}:`,
+      data: OS(),
+    },
+    {
+      label: `${lang.en.reportForm.info.windowSize}:`,
+      data: `${window.innerWidth} x ${window.innerHeight}`,
+    },
+  ];
   var content2 = document.createElement("div");
   var contentInner = document.createElement("div");
   var submitButton = document.createElement("button");
@@ -785,17 +838,20 @@
     element.classList.remove("uno-form-input-error");
   };
   var validateForm = () => {
-    const subject = document.getElementById("subject");
-    const description = document.getElementById("description");
-    if (!storeValues.subject) {
-      handleError(subject);
-      return false;
-    }
-    if (!storeValues.description) {
-      handleError(description);
-      return false;
-    }
-    return true;
+    let isValid = true;
+    const values = {
+      subject: storeValues["subject"],
+      description: storeValues["description"],
+    };
+    Object.keys(values).forEach((name) => {
+      const value = values[name];
+      if (!value) {
+        const element = document.getElementById(name);
+        handleError(element);
+        isValid = false;
+      }
+    });
+    return isValid;
   };
   var handleSubmit = (acceptButton, onSubmit) => {
     if (!validateForm()) return;
@@ -843,7 +899,6 @@
       "sendTo",
       false
     );
-    footer.appendChild(sendToWrapper);
     footer.appendChild(submitButton);
   };
   var createInput = (
@@ -1002,9 +1057,13 @@
     const inputLabel = document.createElement("label");
     inputLabel.classList.add("uno-form-select-label");
     const typeOptions = [
-      { label: lang.en.reportForm.type.bug, value: "1", color: "#F04438" },
-      { label: lang.en.reportForm.type.report, value: "2", color: "#F79009" },
-      { label: lang.en.reportForm.type.feature, value: "3", color: "#17B26A" },
+      { label: lang.en.reportForm.type.bug, value: "12101", color: "#F04438" },
+      {
+        label: lang.en.reportForm.type.report,
+        value: "12305",
+        color: "#F79009",
+      },
+      // {label: lang.en.reportForm.type.feature, value: "3", color: "#17B26A"}
     ];
     createRadio(
       buttonGroup,
@@ -1016,13 +1075,11 @@
       true
     );
     const priorityOptions = [
-      { label: lang.en.reportForm.priority.low, value: "4", color: "#F79008" },
-      {
-        label: lang.en.reportForm.priority.medium,
-        value: "3",
-        color: "#2A70FE",
-      },
-      { label: lang.en.reportForm.priority.high, value: "2", color: "#E14EB6" },
+      { label: "Highest", value: "1" },
+      { label: "High", value: "2" },
+      { label: "Medium", value: "3" },
+      { label: "Low", value: "4" },
+      { label: "Critical", value: "10100" },
     ];
     createSelect(
       buttonGroup,
@@ -1112,35 +1169,6 @@
     aside.appendChild(tabsWrapper2);
     const infoWrapper = document.createElement("div");
     infoWrapper.classList.add("uno-info-list");
-    const OS = () => {
-      if (navigator.appVersion.indexOf("Win") != -1) return "Windows";
-      if (navigator.appVersion.indexOf("Mac") != -1) return "MacOS";
-      if (navigator.appVersion.indexOf("X11") != -1) return "UNIX";
-      if (navigator.appVersion.indexOf("Linux") != -1) return "Linux";
-      return "Unknown OS";
-    };
-    const information = [
-      {
-        label: `${lang.en.reportForm.info.url}:`,
-        data: window.location.href,
-      },
-      {
-        label: `${lang.en.reportForm.info.captured}:`,
-        data: createName(),
-      },
-      {
-        label: `${lang.en.reportForm.info.deviceInfo}:`,
-        data: navigator.userAgent,
-      },
-      {
-        label: `${lang.en.reportForm.info.OS}:`,
-        data: OS(),
-      },
-      {
-        label: `${lang.en.reportForm.info.windowSize}:`,
-        data: `${window.innerWidth} x ${window.innerHeight}`,
-      },
-    ];
     information.forEach((info) => {
       const infoRow = document.createElement("div");
       infoRow.classList.add("uno-info-row");
@@ -1221,6 +1249,7 @@
   var closeRequestFormModal = () => {
     hideModal();
     destroyRequestForm();
+    observable_default.fire("enableButton");
   };
   var destroyRequestForm = () => {
     submitButton.replaceChildren();
@@ -1238,20 +1267,24 @@
       { fullName, email, avatar },
       { fileSize, fileName: createName() },
       () => {
-        request_default(recordedBlob, createName(), storeValues)
+        request_default(recordedBlob, createName(), {
+          storeValues,
+          information,
+        })
           .then((response) => {
             console.info(`[uno-js] Response: ${response.message}`);
             closeRequestFormModal();
           })
           .catch((error) => {
             console.error(`[uno-js] ${error}`);
+            observable_default.fire("enableButton");
           });
       }
     );
   };
   var report_form_default = openReportFormModal;
 
-  // js/lib/uno-js/components/video-preview/video-preview.js
+  // js/lib/uno-js/components/video-preview/index.js
   var __awaiter4 = function (thisArg, _arguments, P, generator) {
     function adopt(value) {
       return value instanceof P
@@ -1518,7 +1551,7 @@
   };
   var video_preview_default = videoPreview;
 
-  // js/lib/uno-js/components/media-stream-recorder/media-stream-recorder.js
+  // js/lib/uno-js/components/media-stream-recorder/index.js
   var __awaiter5 = function (thisArg, _arguments, P, generator) {
     function adopt(value) {
       return value instanceof P
@@ -1772,15 +1805,17 @@
         this.recordIsStarted = state;
       };
       this.initialize = (options) => {
-        var _a, _b;
+        var _a, _b, _c;
         if (!this.validateInitialization(options)) return;
         const startButton = document.getElementById(options.startButtonId);
         states_default.user = options.user;
         states_default.autoSecretKey =
           (_a = options.autoSecretKey) !== null && _a !== void 0 ? _a : void 0;
         states_default.subscriptionData = options.subscriptionData;
-        (_b = options.videoMaxLength) !== null && _b !== void 0
-          ? _b
+        states_default.isExtension =
+          (_b = options.isExtension) !== null && _b !== void 0 ? _b : false;
+        (_c = options.videoMaxLength) !== null && _c !== void 0
+          ? _c
           : (options.videoMaxLength = options.videoMaxLength);
         this.screenRecorder = new media_stream_recorder_default({
           displayMediaConstraints: {
@@ -1864,6 +1899,7 @@
         requestUrl: requiredData.requestUrl,
       },
       startButtonId: "start-btn",
+      isExtension: true,
     };
     console.log({ options });
     unoJS.initialize(options);

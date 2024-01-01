@@ -7,7 +7,7 @@
   </head>
   <body id="body">
     <div class="form-container">
-      <div class="formHeader" id="formHeader">
+      <div class="form-header" id="form-header">
         <img
           src="../assets/icons/unoLogo.svg"
           alt="unoLogo"
@@ -25,27 +25,27 @@
       </div>
       <div class="report">Report your issue</div>
       <div class="menu">
-        <div class="menuBox">
+        <button class="menu-box" id='record-button'>
           <img src="../assets/icons/menuIcons/video.svg" alt="video" />
-          <h4>Video</h4>
-        </div>
-        <div class="menuBox">
-          <img src="../assets/icons/menuIcons/camera.svg" alt="camera" />
-          <h4>Image</h4>
-        </div>
-        <div class="menuBox">
+          <span>Video</span>
+        </button>
+        <button class="menu-box disabled">
+          <img src="../assets/icons/menuIcons/camera-disabled.svg" alt="camera" />
+          <span>Image</span>
+        </button>
+        <button class="menu-box disabled">
           <img
-            src="../assets/icons/menuIcons/microphone.svg"
+            src="../assets/icons/menuIcons/microphone-disabled.svg"
             alt="microphone"
           />
-          <h4>Voice</h4>
-        </div>
-        <div class="menuBox">
-          <img src="../assets/icons/menuIcons/document.svg" alt="document" />
-          <h4>Note</h4>
-        </div>
+          <span>Voice</span>
+        </button>
+        <button class="menu-box disabled">
+          <img src="../assets/icons/menuIcons/document-disabled.svg" alt="document" />
+          <span>Note</span>
+        </button>
       </div>
-      <div class="form-wrapper" id="formWrapper">
+      <div class="form-wrapper" id="form-wrapper">
         <div class="setting-header">
           <img src="../assets/icons/menuIcons/arrow.svg" alt="arrow" width="20" height="20" id="backIc">
           <h3>Setting</h3>
@@ -82,12 +82,11 @@
           <input type="text" id="apiKey" name="apiKey"/>
           <span class="input-message"></span>
         </div>
-        <!-- <div class="bottom-wrapper">
-          <button type="button" id="record-button">Start Record</button>
-        </div> -->
       </div>
     </div>
-
+<!--    <button id="startCapture">Start Capturing</button>-->
+<!--    <button id="stopCapture">Stop Capturing</button>-->
+<!--    <div id="logs"></div>-->
     <script type="text/javascript" src="../js/popup.js"></script>
   </body>
 </html>

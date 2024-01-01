@@ -18,13 +18,13 @@
  *
  * For more information, please see the [uno-js documentation](https://github.com/Uno-Feedback/UnoJs#readme).
  */
-import { checkRecordState, closeRecordWidget, openRecordWidget, resetWidget } from "./components/widget/widget";
-import ScreenMask from "./components/screen-mask/screen-mask";
-import { runTimer, stopTimer } from "./components/timer/timer";
+import { checkRecordState, closeRecordWidget, openRecordWidget, resetWidget } from "./components/widget";
+import ScreenMask from "./components/screen-mask";
+import { runTimer, stopTimer } from "./components/timer";
 import optionsState from "./shared/states";
-import Observable from "./components/observable/observable";
-import { endSecret, startSecret } from "./components/auto-secret/auto-secret";
-import MediaStreamRecorder from "./components/media-stream-recorder/media-stream-recorder";
+import Observable from "./components/observable";
+import { endSecret, startSecret } from "./components/auto-secret";
+import MediaStreamRecorder from "./components/media-stream-recorder";
 import { AUDIO_CHANNEL_COUNT, AUDIO_SAMPLE_SIZE, MAX_FRAME_RATE } from "./shared/constants";
 /**
  * The UnoJSBuilder class is the main entry point for the uno-js package.
@@ -129,7 +129,7 @@ class UnoJSBuilder {
             this.recordIsStarted = state;
         };
         this.initialize = (options) => {
-            var _a, _b;
+            var _a, _b, _c;
             if (!this.validateInitialization(options))
                 return;
             const startButton = document.getElementById(options.startButtonId);
@@ -137,7 +137,8 @@ class UnoJSBuilder {
             optionsState.user = options.user;
             optionsState.autoSecretKey = (_a = options.autoSecretKey) !== null && _a !== void 0 ? _a : undefined;
             optionsState.subscriptionData = options.subscriptionData;
-            (_b = options.videoMaxLength) !== null && _b !== void 0 ? _b : (options.videoMaxLength = options.videoMaxLength);
+            optionsState.isExtension = (_b = options.isExtension) !== null && _b !== void 0 ? _b : false;
+            (_c = options.videoMaxLength) !== null && _c !== void 0 ? _c : (options.videoMaxLength = options.videoMaxLength);
             this.screenRecorder = new MediaStreamRecorder({
                 displayMediaConstraints: {
                     audio: this.audio,

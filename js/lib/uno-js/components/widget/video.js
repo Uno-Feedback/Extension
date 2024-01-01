@@ -12,7 +12,7 @@
  *
  * */
 // Timer element
-import { maskIcon, muteIcon, recordIcon, recordingIcon, stopMaskIcon, stopRecordIcon, unmuteIcon } from "../../assets/svg/svg";
+import { maskIcon, muteIcon, recordIcon, recordingIcon, stopMaskIcon, stopRecordIcon, unmuteIcon } from "../../assets/svg";
 // Timer Elements
 export const timerWrapper = document.createElement("div");
 export const counter = document.createElement("span");
