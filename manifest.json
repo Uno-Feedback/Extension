@@ -29,16 +29,6 @@
     "scripting",
     "nativeMessaging"
   ],
-  "background": {
-    "service_worker": "js/background.js",
-    "type": "module"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["js/content.js"]
-    }
-  ],
   "web_accessible_resources": [
     {
       "matches": [
