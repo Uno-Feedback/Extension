@@ -730,25 +730,25 @@
       const Description = storeValues2["description"];
       const Type = storeValues2["type"];
       const Priority = storeValues2["priority"];
-      const ConnectorMetaData = metaDataConverter(information2);
+      const ClientMetaData = metaDataConverter(information2);
       const ProjectToken = "068F706D-5C3D-4490-AC11-08DC0EADED53";
       const AttachmentType = 10;
       const ConnectorId = "2CF4C00E-4D6E-4DCD-095E-08DC0EADF6FE";
-      formData.append("ProjectToken", JSON.stringify(ProjectToken));
-      formData.append("Reporter", JSON.stringify(Reporter));
-      formData.append("ConnectorId", JSON.stringify(ConnectorId));
-      formData.append("Subject", JSON.stringify(Subject));
-      formData.append("ConnectorMetaData", JSON.stringify(ConnectorMetaData));
-      formData.append("ReportUrl", JSON.stringify(ReportUrl));
+      formData.append("ProjectToken", ProjectToken);
+      formData.append("Reporter", Reporter);
+      formData.append("ConnectorId", ConnectorId);
+      formData.append("Subject", Subject);
+      formData.append("ClientMetaData ", JSON.stringify(ClientMetaData));
+      formData.append("ReportUrl", ReportUrl);
       formData.append("File", file, `${fileName}.webm`);
       formData.append(
         "ConnectorMetaData",
         JSON.stringify({
-          IssueType: JSON.stringify(Type),
-          IssuePriority: JSON.stringify(Priority),
+          IssueType: Type,
+          IssuePriority: Priority,
         })
       );
-      formData.append("Description", JSON.stringify(Description));
+      formData.append("Description", Description);
       formData.append("AttachmentType", JSON.stringify(AttachmentType));
       const response = yield fetch(states_default.subscriptionData.requestUrl, {
         method: "POST",
