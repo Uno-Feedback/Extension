@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { AUDIO_SAMPLE_SIZE, MAX_FRAME_RATE, AUDIO_CHANNEL_COUNT } from "../../shared/constants";
 import Observable from "../observable";
-import videoPreview from "../video-preview";
+import openReportFormModal from "../report-form";
 class MediaStreamRecorder {
     constructor(options) {
         var _a, _b, _c;
@@ -48,7 +48,7 @@ class MediaStreamRecorder {
                 Observable.fire("setRecordState", false);
                 Observable.fire("closeWidget");
                 // Preview of video file
-                videoPreview(recordedBlob);
+                openReportFormModal(recordedBlob);
                 // openRequestFormModal(recordedBlob);
                 console.info(`[uno-js] Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`);
             });

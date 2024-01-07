@@ -312,8 +312,8 @@ const createRadioWrapper = (row, col) => {
     ///////   }
     /////// ]
     const typeOptions = [
-        { label: lang.en.reportForm.type.bug, value: "12101", color: "#F04438" },
-        { label: lang.en.reportForm.type.report, value: "12305", color: "#F79009" }
+        { label: lang.en.reportForm.type.bug, value: "Uno-Bug", color: "#F04438" },
+        { label: lang.en.reportForm.type.report, value: "Uno-Report", color: "#F79009" }
         // {label: lang.en.reportForm.type.feature, value: "3", color: "#17B26A"}
     ];
     createRadio(buttonGroup, innerCol.cloneNode(true), typeOptions, 0, lang.en.reportForm.type.label, "type", true);
@@ -347,11 +347,11 @@ const createRadioWrapper = (row, col) => {
     //////   }
     ////// ]
     const priorityOptions = [
-        { label: "Highest", value: "1" },
-        { label: "High", value: "2" },
-        { label: "Medium", value: "3" },
-        { label: "Low", value: "4" },
-        { label: "Critical", value: "10100" }
+        { label: "Highest", value: "Highest" },
+        { label: "High", value: "High" },
+        { label: "Medium", value: "Medium" },
+        { label: "Low", value: "Low" },
+        { label: "Critical", value: "Critical" }
     ];
     createSelect(buttonGroup, innerCol.cloneNode(true), inputLabel.cloneNode(true), priorityOptions, lang.en.reportForm.priority.label, "priority", 1);
     container.appendChild(buttonGroup);
