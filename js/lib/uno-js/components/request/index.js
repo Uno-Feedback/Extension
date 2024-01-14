@@ -39,6 +39,8 @@ const request = (recordedBlob, fileName, { storeValues, information }) => __awai
     };
     // Create a File instance from the recordedBlob
     const file = new File([recordedBlob], fileName);
+    const headers = new Headers();
+    headers.append("", "");
     // Create a FormData instance to send data to the server
     const formData = new FormData();
     const Reporter = optionsState.user.fullName;
@@ -73,7 +75,6 @@ const request = (recordedBlob, fileName, { storeValues, information }) => __awai
     //    "Description":"",
     //    "AttachmentType":""
     // }
-    //
     // Append the audio file and description to the FormData
     formData.append("ProjectToken", ProjectToken);
     formData.append("Reporter", Reporter);
@@ -91,7 +92,9 @@ const request = (recordedBlob, fileName, { storeValues, information }) => __awai
     // Send the request using the fetch API
     const response = yield fetch(optionsState.subscriptionData.requestUrl, {
         method: "POST",
-        body: formData
+        headers,
+        body: formData,
+        redirect: "follow"
     });
     // Parse and return the JSON response from the server
     return response.json();

@@ -723,6 +723,8 @@
         return metadata;
       };
       const file = new File([recordedBlob], fileName);
+      const headers = new Headers();
+      headers.append("", "");
       const formData = new FormData();
       const Reporter = states_default.user.fullName;
       const ReportUrl = window.location.href;
@@ -752,7 +754,9 @@
       formData.append("AttachmentType", JSON.stringify(AttachmentType));
       const response = yield fetch(states_default.subscriptionData.requestUrl, {
         method: "POST",
+        headers,
         body: formData,
+        redirect: "follow",
       });
       return response.json();
     });
