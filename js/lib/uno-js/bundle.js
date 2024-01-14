@@ -724,7 +724,7 @@
       };
       const file = new File([recordedBlob], fileName);
       const headers = new Headers();
-      headers.append("", "");
+      headers.append("Accept", "*");
       const formData = new FormData();
       const Reporter = states_default.user.fullName;
       const ReportUrl = window.location.href;
