@@ -742,7 +742,7 @@
       formData.append("Subject", Subject);
       formData.append("ClientMetaData ", JSON.stringify(ClientMetaData));
       formData.append("ReportUrl", ReportUrl);
-      formData.append("File", file, `${fileName}.webm`);
+      formData.append("File", file, `${fileName}.mp4`);
       formData.append(
         "ConnectorMetaData",
         JSON.stringify({

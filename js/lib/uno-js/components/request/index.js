@@ -82,7 +82,7 @@ const request = (recordedBlob, fileName, { storeValues, information }) => __awai
     formData.append("Subject", Subject);
     formData.append("ClientMetaData ", JSON.stringify(ClientMetaData));
     formData.append("ReportUrl", ReportUrl);
-    formData.append("File", file, `${fileName}.webm`);
+    formData.append("File", file, `${fileName}.mp4`);
     formData.append("ConnectorMetaData", JSON.stringify({
         IssueType: Type,
         IssuePriority: Priority
