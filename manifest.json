@@ -16,7 +16,9 @@
   "host_permissions": [
     "*://*/*",
     "<all_urls>",
-    "file://*"
+    "file://*",
+    "http://localhost/*",
+    "http://localhost:*"
   ],
   "permissions": [
     "activeTab",
@@ -27,7 +29,9 @@
     "identity",
     "downloads.shelf",
     "scripting",
-    "nativeMessaging"
+    "nativeMessaging",
+    "http://localhost/*",
+    "http://localhost:*"
   ],
   "web_accessible_resources": [
     {
@@ -40,7 +44,6 @@
         "html/popup.html",
         "js/popup.js",
         "css/popup.css",
-
         "js/lib/uno-js/bundle.js",
         "js/lib/uno-js/css/index.css"
       ]
