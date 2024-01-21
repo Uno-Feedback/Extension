@@ -50,9 +50,9 @@ const request = (recordedBlob, fileName, { storeValues, information }) => __awai
     const Type = storeValues["type"];
     const Priority = storeValues["priority"];
     const ClientMetaData = metaDataConverter(information);
-    const ProjectToken = "80d09a22-1e4f-4efe-0b92-08dc0c433e43"; // optionsState.subscriptionData.apiKey;
+    const ProjectToken = "068F706D-5C3D-4490-AC11-08DC0EADED53"; // optionsState.subscriptionData.apiKey;
     const AttachmentType = 10;
-    const ConnectorId = "fe5e9eff-d402-4f27-f27c-08dc0c4370f7";
+    const ConnectorId = "2CF4C00E-4D6E-4DCD-095E-08DC0EADF6FE";
     // Payload example
     // {
     //    "ProjectToken": "",

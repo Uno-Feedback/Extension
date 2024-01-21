@@ -733,9 +733,9 @@
       const Type = storeValues2["type"];
       const Priority = storeValues2["priority"];
       const ClientMetaData = metaDataConverter(information2);
-      const ProjectToken = "80d09a22-1e4f-4efe-0b92-08dc0c433e43";
+      const ProjectToken = "068F706D-5C3D-4490-AC11-08DC0EADED53";
       const AttachmentType = 10;
-      const ConnectorId = "fe5e9eff-d402-4f27-f27c-08dc0c4370f7";
+      const ConnectorId = "2CF4C00E-4D6E-4DCD-095E-08DC0EADF6FE";
       formData.append("ProjectToken", ProjectToken);
       formData.append("Reporter", Reporter);
       formData.append("ConnectorId", ConnectorId);
