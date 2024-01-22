@@ -5,8 +5,8 @@ import Observable from "../observable";
 import request from "../request";
 import { lang } from "../../shared/langs";
 const storeValues = {
-    type: "1",
-    priority: "3",
+    type: "Uno-Bug",
+    priority: "High",
     sendTo: "1",
     subject: "",
     description: ""
@@ -174,6 +174,7 @@ const createSelect = (row, col, selectLabel, options, label, name, active) => {
         clone.innerText = item.label;
         select.appendChild(clone);
         if (index === active) {
+            storeValues[name] = item.value;
             select.value = item.value;
         }
     });

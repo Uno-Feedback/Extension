@@ -764,8 +764,8 @@
 
   // js/lib/uno-js/components/report-form/index.js
   var storeValues = {
-    type: "1",
-    priority: "3",
+    type: "Uno-Bug",
+    priority: "High",
     sendTo: "1",
     subject: "",
     description: "",
@@ -932,6 +932,7 @@
       clone.innerText = item.label;
       select.appendChild(clone);
       if (index === active) {
+        storeValues[name] = item.value;
         select.value = item.value;
       }
     });
