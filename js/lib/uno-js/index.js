@@ -62,6 +62,10 @@ class UnoJSBuilder {
                 console.warn("[uno-js] Auto secret data attribute not set.");
             return true;
         };
+        this.observeTime = ({ minutes }) => {
+            if (minutes === optionsState.videoMaxLength)
+                this.stopRecord();
+        };
         this.startRecord = () => {
             if (!this.screenRecorder)
                 return;
@@ -175,11 +179,6 @@ class UnoJSBuilder {
         this.audio = true;
         this.maskIsRunning = false;
         this.recordIsStarted = false;
-    }
-    observeTime({ minutes }) {
-        if (minutes === optionsState.videoMaxLength) {
-            this.stopRecord();
-        }
     }
 }
 const unoJS = new UnoJSBuilder();

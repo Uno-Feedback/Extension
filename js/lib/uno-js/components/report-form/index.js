@@ -1,9 +1,10 @@
 import initialModal, { createTitle, hideModal, showModal } from "../modal";
 import optionsState from "../../shared/states";
-import { submitIcon } from "../../assets/svg";
+import { previewVideoIcon, submitIcon } from "../../assets/svg";
 import Observable from "../observable";
 import request from "../request";
 import { lang } from "../../shared/langs";
+import videoPreview from "../video-preview";
 const storeValues = {
     type: "Uno-Bug",
     priority: "High",
@@ -47,12 +48,14 @@ const information = [
 const content = document.createElement("div");
 const contentInner = document.createElement("div");
 const submitButton = document.createElement("button");
+const previewButton = document.createElement("button");
 const footer = document.createElement("div");
 const attachment = document.createElement("div");
 const attachmentName = document.createElement("span");
 const attachmentSize = document.createElement("span");
 const form = document.createElement("div");
 const formRow = document.createElement("div");
+const aside = document.createElement("aside");
 const onChangeValue = (event) => {
     const { name, value } = event.target;
     storeValues[name] = value;
@@ -91,6 +94,14 @@ const handleSubmit = (acceptButton, onSubmit) => {
     disableButton(acceptButton);
     Observable.subscribe("enableButton", () => enableButton(acceptButton));
 };
+const handlePreview = (recordedBlob) => {
+    if (!recordedBlob) {
+        console.error("[uno-js] File not found.");
+        return;
+    }
+    destroyRequestForm();
+    videoPreview(recordedBlob);
+};
 const createFooter = ({}, onSubmit) => {
     // Footer
     footer.classList.add("uno-form-footer");
@@ -128,6 +139,21 @@ const createFooter = ({}, onSubmit) => {
     // footer.appendChild(sendToWrapper);
     // - Append Submit Button to Footer
     footer.appendChild(submitButton);
+};
+const createPreviewButton = (wrapper, recordedBlob) => {
+    previewButton.classList.add("uno-form-preview-button");
+    const previewButtonText = document.createElement("span");
+    const previewButtonIcon = document.createElement("span");
+    previewButtonIcon.classList.add("uno-form-preview-button-icon");
+    previewButtonText.innerText = lang.en.reportForm.preview;
+    previewButtonIcon.innerHTML = previewVideoIcon;
+    previewButton.appendChild(previewButtonText);
+    previewButton.appendChild(previewButtonIcon);
+    previewButton.onclick = () => {
+        handlePreview(recordedBlob);
+    };
+    // divider
+    wrapper.appendChild(previewButton);
 };
 const createInput = (row, col, inputLabel, label, name, initialValue, hasPlaceholder, isRequired) => {
     // Input
@@ -360,7 +386,7 @@ const createRadioWrapper = (row, col) => {
     // Col append to buttonGroup
     row.appendChild(col);
 };
-const createForm = ({ fileName, fileSize }) => {
+const createForm = ({ recordedBlob, fileName, fileSize }) => {
     // Wrapper
     form.classList.add("uno-form");
     // Row
@@ -384,7 +410,6 @@ const createForm = ({ fileName, fileSize }) => {
     createTextArea(formRow, col.cloneNode(true), inputLabel.cloneNode(true), lang.en.reportForm.description, "description", false, true);
     formRow.appendChild(divider.cloneNode(true));
     const attachmentCol = col.cloneNode(true);
-    attachmentCol.classList.add("last");
     const fileTitle = document.createElement("div");
     fileTitle.classList.add("uno-form-attachment-title");
     fileTitle.innerText = lang.en.reportForm.fileTitle;
@@ -402,10 +427,16 @@ const createForm = ({ fileName, fileSize }) => {
     // - Append Attachment to Footer
     attachmentCol.appendChild(attachment);
     formRow.appendChild(attachmentCol);
+    // - Video Preview
+    const videoPreviewCol = col.cloneNode(true);
+    videoPreviewCol.classList.add("uno-form-preview-wrapper");
+    videoPreviewCol.classList.add("last");
+    createPreviewButton(videoPreviewCol, recordedBlob);
+    formRow.appendChild(divider);
+    formRow.appendChild(videoPreviewCol);
     return form;
 };
 const createInfo = () => {
-    const aside = document.createElement("aside");
     aside.classList.add("uno-info");
     // - Tabs
     // Tab Element
@@ -451,24 +482,24 @@ const createInfo = () => {
     aside.appendChild(infoWrapper);
     return aside;
 };
-const createContent = ({ fileSize, fileName }) => {
+const createContent = ({ recordedBlob, fileSize, fileName }) => {
     content.setAttribute("id", "uno-report-form");
     contentInner.classList.add("uno-content");
-    contentInner.appendChild(createForm({ fileSize, fileName }));
+    contentInner.appendChild(createForm({ recordedBlob, fileSize, fileName }));
     contentInner.appendChild(createInfo());
     content.appendChild(contentInner);
 };
-const initialInnerElements = ({}, { fileSize, fileName }, onSubmit) => {
-    createContent({ fileSize, fileName });
+const initialInnerElements = ({}, { recordedBlob, fileSize, fileName }, onSubmit) => {
+    createContent({ recordedBlob, fileSize, fileName });
     createFooter({ fileSize, fileName }, onSubmit);
 };
 /**
  * Append Form to Modal
  * ////////////////////
  * **/
-const appendFormToModal = ({ fullName, email, avatar }, { fileSize, fileName }, onSubmit) => {
+const appendFormToModal = ({ fullName, email, avatar }, { recordedBlob, fileSize, fileName }, onSubmit) => {
     initialModal(createTitle(lang.en.reportForm.title), () => destroyRequestForm()).then(modalContent => {
-        initialInnerElements({ fullName, email, avatar }, { fileSize, fileName }, onSubmit);
+        initialInnerElements({ fullName, email, avatar }, { recordedBlob, fileSize, fileName }, onSubmit);
         modalContent.appendChild(content).appendChild(footer);
         showModal();
     });
@@ -516,6 +547,7 @@ const destroyRequestForm = () => {
     /**
      * Destroy Footer
      */
+    previewButton.replaceChildren();
     submitButton.replaceChildren();
     attachment.replaceChildren();
     footer.remove();
@@ -524,13 +556,15 @@ const destroyRequestForm = () => {
      */
     formRow.replaceChildren();
     form.replaceChildren();
+    aside.replaceChildren();
+    aside.remove();
     content.replaceChildren();
     content.remove();
 };
 const openReportFormModal = (recordedBlob) => {
     const fileSize = formatBytes(recordedBlob.size, 2);
     const { fullName, email, avatar } = optionsState.user;
-    appendFormToModal({ fullName, email, avatar }, { fileSize, fileName: createName() }, () => {
+    appendFormToModal({ fullName, email, avatar }, { recordedBlob, fileSize, fileName: createName() }, () => {
         /* todo set loading true */
         request(recordedBlob, createName(), { storeValues, information })
             .then(response => {

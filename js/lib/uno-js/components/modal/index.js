@@ -32,10 +32,10 @@ const body = document.querySelector("body");
 const initialInnerElements = (title) => {
     // Fade
     fade.classList.add("uno-modal-fade");
+    fade.setAttribute("id", "uno-modal");
     body.appendChild(fade);
     // Modal
     modal.classList.add("uno-modal");
-    modal.setAttribute("id", "uno-modal");
     fade.appendChild(modal);
     // Header
     header.classList.add("uno-modal-header");

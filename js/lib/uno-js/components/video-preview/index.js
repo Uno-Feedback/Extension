@@ -168,6 +168,7 @@ const resetController = () => {
 };
 const initialInnerElements = (recordedBlob) => __awaiter(void 0, void 0, void 0, function* () {
     videoWrapper.classList.add("uno-video-wrapper");
+    videoWrapper.setAttribute("id", "uno-video");
     videoElement.classList.add("uno-video-element");
     blobToBase64(recordedBlob).then(url => {
         // Video URL
